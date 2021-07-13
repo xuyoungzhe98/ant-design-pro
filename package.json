@@ -50,12 +50,14 @@
     "react-fittext": "^1.0.0",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1",
-    "umi": "^2.0.0-beta.10"
+    "umi": "^2.0.0-beta.10",
+    "umi-plugin-react": "^1.15.8"
   },
   "devDependencies": {
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.6",
-    "antd-pro-merge-less": "^0.0.9",
+    "@umijs/preset-react": "^1.8.13",
+    "antd-pro-merge-less": "0.0.9",
     "antd-pro-theme-webpack-plugin": "^1.1.8",
     "babel-eslint": "^9.0.0",
     "cross-env": "^5.1.1",
@@ -79,7 +81,7 @@
     "stylelint": "^9.4.0",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.0.0",
-    "umi-plugin-react": "^1.0.0-beta.10"
+    "umi": "^3.4.11"
   },
   "optionalDependencies": {
     "puppeteer": "^1.6.0"

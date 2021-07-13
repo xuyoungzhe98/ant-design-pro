@@ -20,6 +20,15 @@ import Context from './MenuContext';
 const { Content } = Layout;
 const { check } = Authorized;
 
+
+function formatters1(data,parentPath='',paraentAuthority,parentName)
+{
+  return data.map(t=>{
+
+  })
+}
+
+
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
   return data.map(item => {
@@ -216,12 +225,12 @@ class BasicLayout extends React.PureComponent {
   };
 
   render() {
-    const {
-      navTheme,
-      layout: PropsLayout,
-      children,
-      location: { pathname },
-    } = this.props;
+      const {
+        navTheme,
+        layout: PropsLayout,
+        children,
+        location: { pathname },
+      } = this.props;
     const { rendering, isMobile } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const menuData = this.getMenuData();

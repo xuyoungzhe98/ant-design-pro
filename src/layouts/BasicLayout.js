@@ -16,18 +16,10 @@ import logo from '../assets/logo.svg';
 import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
+import {getRoutes} from '@/utils/utils'
 
 const { Content } = Layout;
 const { check } = Authorized;
-
-
-function formatters1(data,parentPath='',paraentAuthority,parentName)
-{
-  return data.map(t=>{
-
-  })
-}
-
 
 // Conversion router to menu.
 function formatter(data, parentPath = '', parentAuthority, parentName) {
@@ -53,6 +45,19 @@ function formatter(data, parentPath = '', parentAuthority, parentName) {
     delete result.routes;
     return result;
   });
+}
+
+function getFlatMenuData(menus) {
+    let keys=[];
+    menus.forEach(item=>{
+      keys[item.path] = { ...item };
+      if(item.routes)
+      {
+        keys={...keys,...getFlatMenuData(item.routes)}
+      }
+    })
+
+    return keys;  
 }
 
 const query = {
@@ -101,6 +106,9 @@ class BasicLayout extends React.PureComponent {
     dispatch({
       type: 'setting/getSetting',
     });
+    dispatch({
+      type: 'routecustom/getRemoteRoutes',
+    });
     this.renderRef = requestAnimationFrame(() => {
       this.setState({
         rendering: false,
@@ -133,11 +141,11 @@ class BasicLayout extends React.PureComponent {
     };
   }
 
+  
   getMenuData() {
-    const {
-      route: { routes },
-    } = this.props;
-    return formatter(routes);
+    const routes=getFlatMenuData(this.props.routes);
+    const ret=getRoutes(this.props.match.path, routes);
+    return formatter(ret);
   }
 
   /**
@@ -284,8 +292,9 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ global, setting }) => ({
+export default connect(({ global, setting,routecustom }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   ...setting,
+  routes:routecustom?.Route,
 }))(BasicLayout);
